@@ -32,8 +32,11 @@ jobs:
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
 
-      - name: Deploy to CloudHub 2.0
-        run: |
-          mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
-          -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+    - name: Deploy to CloudHub 2.0
+  run: |
+    mvn deploy -X -e \
+    --settings .maven/settings.xml \
+    -DskipMunitTests -DmuleDeploy \
+    -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
+    -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+
